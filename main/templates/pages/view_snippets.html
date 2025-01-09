@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Название</th>
+        <th scope="col">Дата создания</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data_item in data %}
+        <tr>
+          <th scope="row">{{ data_item.id }}</th>
+          <td>
+            <a href="/snippets/{{ data_item.id }}">{{ data_item.name }}</a>
+          </td>
+          <td>{{ data_item.creation_date }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
