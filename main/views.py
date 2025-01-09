@@ -22,7 +22,7 @@ def get_base_context(request, pagename):
 
 
 def index_page(request):
-    context = get_base_context(request, "PythonBin")
+    context = get_base_context(request, "Инвентарь")
 
     if request.method == "GET":
         snippet_id: str | None = request.GET.get("snippet_id", "")
@@ -40,6 +40,9 @@ def add_snippet_page(request):
             record = Snippet(
                 name=addform.data["name"],
                 code=addform.data["code"],
+                condition = addform.data["condition"],
+                count = addform.data["count"],
+                send_user = addform.data["send_user"],
                 creation_date=datetime.datetime.now(),
                 user=request.user if request.user.is_authenticated else None,
             )
@@ -67,6 +70,9 @@ def view_snippet_page(request, id):
             initial={
                 "user": record.user.username if record.user != None else "AnonymousUser",
                 "name": record.name,
+                "condition" : record.condition,
+                "count" : record.count,
+                "send_user" : record.send_user,
             }
         )
         # 1. Поменяли название переменной в контексте

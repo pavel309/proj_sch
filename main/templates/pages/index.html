@@ -28,14 +28,33 @@
 
   <div class="row mt-3">
     <div class="col-4 offset-4">
-      <a href="{% url 'add_snippet' %}" class="btn btn-success btn-block">Добавить сниппет</a>
+      <a href="{% url 'add_snippet' %}" class="btn btn-success btn-block">Добавить инвентарь</a>
     </div>
   </div>
 
   <div class="row mt-3">
     <div class="col">
       <hr />
-      <h4>Найти сниппет по номеру</h4>
+      <h4>Найти инвентарь</h4>
+      <form action="/" method="get" id="view_snippet_form">
+        <div class="form-group row">
+          <label for="snippet_id" class="col-sm-2 col-form-label col-form-label-lg">Номер:</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control form-control-lg" id="snippet_id" name="snippet_id" placeholder="введите число" />
+          </div>
+          <div class="col-sm-2">
+            <input type="submit" class="form-control form-control-lg btn btn-info" value="Найти" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row mt-3">
+    <div class="col">
+      <hr />
+      <h4>Найти инвентарь</h4>
       <form action="/" method="get" id="view_snippet_form">
         <div class="form-group row">
           <label for="snippet_id" class="col-sm-2 col-form-label col-form-label-lg">Номер:</label>

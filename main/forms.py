@@ -42,8 +42,20 @@ class AddSnippetForm(forms.Form):
         ),
         required=False,
     )
+
+    condition = forms.CharField(
+        label="Состояние", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    count = forms.CharField(
+        label="Количество", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    send_user = forms.CharField(
+        label="Имя поставщика", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
     code = forms.CharField(
-        label="Код",
+        label="Описание",
         max_length=5000,
         widget=forms.Textarea(attrs={"class": "form-control", "style": "height:500px"}),
     )

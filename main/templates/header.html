@@ -4,7 +4,7 @@
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static 'images/logo.png' %}" width="32" height="32" alt="">
-            PythonBin
+            Управление спортивным инвентарём
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -15,11 +15,11 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="form-inline">
-                    <a class="btn btn-outline-success" href="{% url 'add_snippet' %}">Добавить сниппет</a>
+                    <a class="btn btn-outline-success" href="{% url 'add_snippet' %}">Добавить инвентарь</a>
                 </li>
 
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'my_snippets' %}">Мои сниппеты</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'my_snippets' %}">Доступный инвентарь </a></li>
                 {% endif %}
             </ul>
 
@@ -36,7 +36,7 @@
 
                 <li class="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
                     <a class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
-                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         {% include 'login.html' %}
                     </div>
