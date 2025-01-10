@@ -31,6 +31,7 @@ class AddSnippetForm(forms.Form):
     name = forms.CharField(
         label="Название", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
     )
+    
     user = forms.CharField(
         label="Пользователь",
         max_length=20,

@@ -3,11 +3,11 @@ from django.db import models
 
 
 class Snippet(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200 , default='')
     code = models.TextField(max_length=5000)
-    condition = models.CharField(max_length=200)
-    count = models.CharField(max_length=200)
-    send_user = models.CharField(max_length=200)
+    condition = models.CharField(max_length=200 , default='')
+    count = models.CharField(max_length=200 , default='')
+    send_user = models.CharField(max_length=200 , default='')
     creation_date = models.DateTimeField()
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, blank=True, null=True
