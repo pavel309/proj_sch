@@ -76,7 +76,7 @@ def view_snippet_page(request, id):
             }
         )
         # 1. Поменяли название переменной в контексте
-        context["code_html_str"] = highlight(record.code, PythonLexer(), HtmlFormatter())
+        # context["code_html_str"] = highlight(record.code, PythonLexer(), HtmlFormatter())
         # 2. Добавил файл стилей в static со стилем, который получил через HtmlFormatter().get_style_defs(".highlight")
     except Snippet.DoesNotExist:
         raise Http404
