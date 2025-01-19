@@ -26,4 +26,6 @@ urlpatterns = [
     path('snippets/<int:id>', views.view_snippet_page, name='view_snippet'),
     path('login/', views.login_page, name='login'),
     path('logout/', views.logout_page, name='logout'),
+    path('register/', views.register, name='register'), 
+    path('snippets/<int:id>/edit/', views.edit_snippet, name='edit_snippet'),
 ]

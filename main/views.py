@@ -2,15 +2,49 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect, get_object_or_404
 # from pygments import highlight
 # from pygments.formatters import HtmlFormatter
 # from pygments.lexers import PythonLexer
 
-from main.forms import AddSnippetForm, LoginForm
+from .forms import RegisterForm, AddSnippetForm, LoginForm
 from main.models import Snippet
+
+
+
+# Функция для проверки, является ли пользователь администратором
+def is_admin(user):
+    return user.username == 'vasya'  # Замените 'admin' на имя вашего администратора
+
+# Регистрация пользователя
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.add_message(request, messages.SUCCESS, "Регистрация прошла успешно!")
+            return redirect('index')
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
+
+# Редактирование сниппета администратором
+@login_required
+@user_passes_test(is_admin)
+def edit_snippet(request, id):
+    snippet = get_object_or_404(Snippet, id=id)
+    if request.method == 'POST':
+        snippet.condition = request.POST.get('condition')
+        snippet.count = request.POST.get('count')
+        snippet.save()
+        messages.add_message(request, messages.SUCCESS, "Сниппет успешно обновлён!")
+        return redirect('view_snippet', id=id)
+    return render(request, 'edit_snippet.html', {'snippet': snippet})
+
+
 
 
 def get_base_context(request, pagename):
@@ -39,7 +73,7 @@ def add_snippet_page(request):
         if addform.is_valid():
             record = Snippet(
                 name=addform.data["name"],
-                code=addform.data["code"],
+                text=addform.data["text"],
                 condition = addform.data["condition"],
                 count = addform.data["count"],
                 send_user = addform.data["send_user"],
@@ -73,6 +107,7 @@ def view_snippet_page(request, id):
                 "condition" : record.condition,
                 "count" : record.count,
                 "send_user" : record.send_user,
+                "text" : record.text,
             }
         )
         # 1. Поменяли название переменной в контексте

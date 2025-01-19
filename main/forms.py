@@ -1,4 +1,13 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 class LoginForm(forms.Form):
@@ -55,7 +64,7 @@ class AddSnippetForm(forms.Form):
     send_user = forms.CharField(
         label="Имя поставщика", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
     )
-    code = forms.CharField(
+    text = forms.CharField(
         label="Описание",
         max_length=5000,
         widget=forms.Textarea(attrs={"class": "form-control", "style": "height:500px"}),

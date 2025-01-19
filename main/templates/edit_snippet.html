@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Редактирование сниппета</h2>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="condition">Состояние:</label>
+        <input type="text" id="condition" name="condition" value="{{ snippet.condition }}">
+    </div>
+    <div>
+        <label for="count">Количество:</label>
+        <input type="text" id="count" name="count" value="{{ snippet.count }}">
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

@@ -22,11 +22,18 @@
           </div>
           <div class="form-group row">
             {% comment %}1. Поменял имя переменной, в которой код в HTML-формате{% endcomment %}
-            <div class="col">{{ addform.code.label }}: {{ code_html_str|safe }}</div>
+            <div class="col">{{ addform.text.label }}: {{ addform.text}}</div>
             {% comment %}3. Теперь только остаётся сделать так, чтобы код был как и ранее в textarea{% endcomment %}
           </div>
         </fieldset>
       </form>
+      {% if user.username == 'vasya' %}
+          {% if snippet.id %}
+              <a href="{% url 'edit_snippet' id=snippet.id %}" class="btn btn-primary">Редактировать</a>
+          {% else %}
+              <p>ID сниппета не определён.</p>
+          {% endif %}
+      {% endif %}
     </div>
   </div>
 {% endblock %}
