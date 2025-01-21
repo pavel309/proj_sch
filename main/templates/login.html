@@ -1,4 +1,4 @@
-<form class="w-100 px-4 py-3" action="{% url 'login' %}" method="post">
+<form class="w-auto px-4 py-3  " action="{% url 'login' %}" method="post">
     {% csrf_token %}
 
     {% for field in loginform.visible_fields %}
@@ -8,8 +8,3 @@
     <button type="submit" class="btn btn-outline-primary">Войти</button>
 </form>
 
-{% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-{% comment %} <a class="dropdown-item disabled" href="#"> аккаунт <br>
-    логин: <b>vasya</b><br>
-    пароль: <b>promprog</b>
-</a> {% endcomment %}

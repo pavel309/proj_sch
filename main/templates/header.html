@@ -21,27 +21,46 @@
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'my_snippets' %}">Доступный инвентарь </a></li>
                 {% endif %}
+
+                
             </ul>
 
             {% if request.user.is_authenticated %}
 
-                <ul class="navbar-nav mr-right">
+                <ul class="navbar-nav ml-auto">
                     <span class="navbar-text">
                         Здравствуй, {{ request.user.username }}!
                     </span>
                     <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
 
-            {% else %}
+            {% comment %} {% else %}
 
-                <li class="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
-                    <a class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
+                <li class="navbar-nav ml-auto nav-item dropdown ">
+                    <li class="form-inline">
+                        <a class="btn btn-outline-primary my-2 mr-1 ml-1 " href="{% url 'register' %}">Зарегистрироваться</a>
+                    </li>
+                    <a class="btn btn-outline-primary  my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                         {% include 'login.html' %}
                     </div>
                 </li>
 
+            {% endif %} {% endcomment %}
+            {% else %}
+                <li class="navbar-nav ml-auto nav-item dropdown">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary my-2 " href="{% url 'register' %}">Зарегистрироваться</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
+                        <div class="dropdown-menu mt-3 "  aria-labelledby="navbarDropdown">
+                            {% include 'login.html' %}
+                        </div>
+                    </li>
+                </li>
             {% endif %}
         </div>
     </div>
