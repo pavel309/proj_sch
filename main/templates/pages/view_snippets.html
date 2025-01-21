@@ -10,6 +10,7 @@
         <th scope="col">Состоянние</th>
         <th scope="col">Количество </th>
         <th scope="col">Поставщик </th>
+        <th scope="col">Статус </th>
         
       </tr>
     </thead>
@@ -24,6 +25,7 @@
           <td>{{ data_item.condition }}</td>
           <td>{{ data_item.count }}</td>
           <td>{{ data_item.send_user }}</td>
+          <td>{{ data_item.status }}</td>
         </tr>
       {% endfor %}
     </tbody>

@@ -8,6 +8,7 @@ class Snippet(models.Model):
     condition = models.CharField(max_length=200 , default='')
     count = models.CharField(max_length=200 , default='')
     send_user = models.CharField(max_length=200 , default='')
+    status = models.CharField(max_length=200 , default='Ожидается подтверждение')
     creation_date = models.DateTimeField()
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, blank=True, null=True

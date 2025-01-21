@@ -4,14 +4,30 @@
 <h2>Редактирование сниппета</h2>
 <form method="post">
     {% csrf_token %}
-    <div>
-        <label for="condition">Состояние:</label>
-        <input type="text" id="condition" name="condition" value="{{ snippet.condition }}">
+    <div class ="row"> 
+        <div class ="col"> 
+            <div class = "col col-4">
+                <label for="condition">Состояние:</label>
+                <input type="text" id="condition" name="condition" value="{{ snippet.condition }}">
+            </div>
+            <div class = "col col-4">
+                <label for="count">Количество:</label>
+                <input type="text" id="count" name="count" value="{{ snippet.count }}">
+            </div>
+            <div class = "col col-4">
+                <label for="status">Состояние:</label>
+                <input type="text" id="status" name="status" value="{{ snippet.status }}">
+            </div>
+            <div class = "col col-4">
+                <label for="text">Описание:</label>
+                <input type="text" id="text" name="text" value="{{ snippet.count }}">
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="count">Количество:</label>
-        <input type="text" id="count" name="count" value="{{ snippet.count }}">
+    <div class = "form-group row">
+        <div class = "col">
+            <button type="submit" class = "btn btn-primary btn-block" value="Сохранить" />
+        </div>
     </div>
-    <button type="submit">Сохранить</button>
 </form>
 {% endblock %}

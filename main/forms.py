@@ -42,30 +42,37 @@ class AddSnippetForm(forms.Form):
     )
     
     user = forms.CharField(
-        label="Пользователь",
-        max_length=20,
-        widget=forms.TextInput(
-            attrs={
+        label = "Пользователь",
+        max_length = 20,
+        widget = forms.TextInput(
+            attrs = {
                 "class": "form-control",
                 "disabled": "",
             }
         ),
-        required=False,
+        required = False,
     )
 
     condition = forms.CharField(
-        label="Состояние", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+        label = "Состояние", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
     )
 
     count = forms.CharField(
-        label="Количество", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+        label = "Количество", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
     )
 
     send_user = forms.CharField(
-        label="Имя поставщика", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+        label = "Имя поставщика", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
     )
     text = forms.CharField(
-        label="Описание",
-        max_length=5000,
-        widget=forms.Textarea(attrs={"class": "form-control", "style": "height:500px"}),
+        label = "Описание",
+        max_length = 5000,
+        widget = forms.Textarea(attrs={"class": "form-control", "style": "height:500px"}),
+    )
+
+    status = forms.CharField(
+        label = "Статус",
+        max_length = 200,
+        widget = forms.TextInput(attrs={"class": "form-control"}),
+        required = False,
     )

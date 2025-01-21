@@ -16,7 +16,7 @@ from main.models import Snippet
 
 # Функция для проверки, является ли пользователь администратором
 def is_admin(user):
-    return user.username == 'vasya'  # Замените 'admin' на имя вашего администратора
+    return user.is_superuser == 1  
 
 # Регистрация пользователя
 def register(request):
@@ -39,6 +39,8 @@ def edit_snippet(request, id):
     if request.method == 'POST':
         snippet.condition = request.POST.get('condition')
         snippet.count = request.POST.get('count')
+        snippet.status = request.POST.get('status')
+        snippet.text = request.POST.get('text')
         snippet.save()
         messages.add_message(request, messages.SUCCESS, "Сниппет успешно обновлён!")
         return redirect('view_snippet', id=id)
@@ -78,6 +80,7 @@ def add_snippet_page(request):
                 count = addform.data["count"],
                 send_user = addform.data["send_user"],
                 creation_date=datetime.datetime.now(),
+                status = addform.data["status"],
                 user=request.user if request.user.is_authenticated else None,
             )
             record.save()
@@ -100,6 +103,7 @@ def view_snippet_page(request, id):
     context = get_base_context(request, "Просмотр сниппета")
     try:
         record = Snippet.objects.get(id=id)
+        context["record"] = record
         context["addform"] = AddSnippetForm(
             initial={
                 "user": record.user.username if record.user != None else "AnonymousUser",
@@ -108,11 +112,9 @@ def view_snippet_page(request, id):
                 "count" : record.count,
                 "send_user" : record.send_user,
                 "text" : record.text,
+                "status" : record.status,
             }
         )
-        # 1. Поменяли название переменной в контексте
-        # context["code_html_str"] = highlight(record.code, PythonLexer(), HtmlFormatter())
-        # 2. Добавил файл стилей в static со стилем, который получил через HtmlFormatter().get_style_defs(".highlight")
     except Snippet.DoesNotExist:
         raise Http404
     return render(request, "pages/view_snippet.html", context)
