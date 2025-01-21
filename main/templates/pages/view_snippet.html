@@ -28,7 +28,7 @@
       </form>
       {% if user.is_superuser == 1 %}
           {% if record.id %}
-              <a href="{% url 'edit_snippet' id=record.id %}" class="btn btn-primary">Редактировать</a>
+              <a href="{% url 'edit_snippet' id=record.id %}" class="btn btn-outline-primary">Редактировать</a>
           {% else %}
               <p>ID сниппета не определён.</p>
           {% endif %}
