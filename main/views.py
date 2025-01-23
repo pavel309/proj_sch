@@ -146,5 +146,8 @@ def logout_page(request):
 @login_required
 def my_snippets_page(request):
     context = get_base_context(request, "Мои сниппеты")
-    context["data"] = Snippet.objects.filter(user=request.user)
+    if request.user.is_superuser:
+        context["data"] = Snippet.objects.all()
+    else:
+        context["data"] = Snippet.objects.filter(user=request.user)
     return render(request, "pages/view_snippets.html", context)

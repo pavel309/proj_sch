@@ -49,18 +49,18 @@
 
             {% endif %} {% endcomment %}
             {% else %}
-                <li class="navbar-nav ml-auto nav-item dropdown">
-                    <li class="nav-item">
+                <ul class="navbar-nav ml-auto nav-item dropdown">
+                    <ul class="nav-item">
                         <a class="btn btn-outline-primary my-2 " href="{% url 'register' %}">Зарегистрироваться</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                    </ul>
+                    <ul class="nav-item dropdown">
                         <a class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
                         <div class="dropdown-menu mt-3 "  aria-labelledby="navbarDropdown">
                             {% include 'login.html' %}
                         </div>
-                    </li>
-                </li>
+                    </ul>
+                </ul>
             {% endif %}
         </div>
     </div>
