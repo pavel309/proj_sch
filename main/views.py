@@ -1,5 +1,5 @@
 import datetime
-
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -31,6 +31,19 @@ def register(request):
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
 
+
+@login_required
+@user_passes_test(is_admin)
+def delete_snippet(request, id):
+    snippet = get_object_or_404(Snippet, id=id)
+    
+    if request.method == 'POST':
+        snippet.delete()
+        messages.add_message(request, messages.SUCCESS, "Сниппет успешно удалён!")
+        return redirect('my_snippets')
+    
+    return render(request, 'confirm_delete.html', {'snippet': snippet})
+
 # Редактирование сниппета администратором
 @login_required
 @user_passes_test(is_admin)
@@ -41,6 +54,8 @@ def edit_snippet(request, id):
         snippet.count = request.POST.get('count')
         snippet.status = request.POST.get('status')
         snippet.text = request.POST.get('text')
+
+        # Сохраняем изменения в сниппете
         snippet.save()
         messages.add_message(request, messages.SUCCESS, "Сниппет успешно обновлён!")
         return redirect('view_snippet', id=id)
@@ -69,7 +84,7 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    context = get_base_context(request, "Добавление нового сниппета")
+    context = get_base_context(request, "Добавление нового инвентаря")
     if request.method == "POST":
         addform = AddSnippetForm(request.POST)
         if addform.is_valid():
@@ -80,12 +95,11 @@ def add_snippet_page(request):
                 count = addform.data["count"],
                 send_user = addform.data["send_user"],
                 creation_date=datetime.datetime.now(),
-                status = addform.data["status"],
                 user=request.user if request.user.is_authenticated else None,
             )
             record.save()
             id = record.id
-            messages.add_message(request, messages.SUCCESS, "Сниппет успешно добавлен")
+            messages.add_message(request, messages.SUCCESS, "Инвентарь успешно добавлен")
             return redirect("view_snippet", id=id)
         else:
             messages.add_message(request, messages.ERROR, "Некорректные данные в форме")
@@ -100,7 +114,7 @@ def add_snippet_page(request):
 
 
 def view_snippet_page(request, id):
-    context = get_base_context(request, "Просмотр сниппета")
+    context = get_base_context(request, "Просмотр инвентаря")
     try:
         record = Snippet.objects.get(id=id)
         context["record"] = record
@@ -145,7 +159,7 @@ def logout_page(request):
 
 @login_required
 def my_snippets_page(request):
-    context = get_base_context(request, "Мои сниппеты")
+    context = get_base_context(request, "Мой инвентарь")
     if request.user.is_superuser:
         context["data"] = Snippet.objects.all()
     else:

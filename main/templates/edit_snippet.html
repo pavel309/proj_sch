@@ -5,7 +5,6 @@
 <form method="post">
     {% csrf_token %}
     <div class ="form-group row"> 
-        
             <div class = "col col-8 p-1 ">
                 <label for="condition">Состояние:</label>
                 <input type="text" id="condition" name="condition" value="{{ snippet.condition }}">
@@ -15,7 +14,7 @@
                 <input type="text" id="count" name="count" value="{{ snippet.count }}">
             </div>
             <div class = "col col-8 p-1">
-                <label for="status">Состояние:</label>
+                <label for="status">Статус</label>
                 <input type="text" id="status" name="status" value="{{ snippet.status }}">
             </div>
             <div class = "col col-8 p-1 ">

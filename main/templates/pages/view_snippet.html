@@ -29,6 +29,7 @@
       {% if user.is_superuser == 1 %}
           {% if record.id %}
               <a href="{% url 'edit_snippet' id=record.id %}" class="btn btn-outline-primary">Редактировать</a>
+              <a href="{% url 'confirm_delete' id=record.id %}" class="btn btn-outline-danger" onclick="return confirm('Вы уверены, что хотите удалить этот сниппет?');">Удалить</a>
           {% else %}
               <p>ID сниппета не определён.</p>
           {% endif %}
