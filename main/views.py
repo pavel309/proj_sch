@@ -39,7 +39,7 @@ def delete_snippet(request, id):
     
     if request.method == 'POST':
         snippet.delete()
-        messages.add_message(request, messages.SUCCESS, "Сниппет успешно удалён!")
+        messages.add_message(request, messages.SUCCESS, "Данные успешно удалён!")
         return redirect('my_snippets')
     
     return render(request, 'confirm_delete.html', {'snippet': snippet})
@@ -55,9 +55,9 @@ def edit_snippet(request, id):
         snippet.status = request.POST.get('status')
         snippet.text = request.POST.get('text')
 
-        # Сохраняем изменения в сниппете
+        # Сохраняем изменения
         snippet.save()
-        messages.add_message(request, messages.SUCCESS, "Сниппет успешно обновлён!")
+        messages.add_message(request, messages.SUCCESS, "Данные успешно обновлён!")
         return redirect('view_snippet', id=id)
     return render(request, 'edit_snippet.html', {'snippet': snippet})
 
@@ -130,7 +130,8 @@ def view_snippet_page(request, id):
             }
         )
     except Snippet.DoesNotExist:
-        raise Http404
+        messages.error(request, "Инвентарь с указанным ID не найден.")
+        return redirect('index')
     return render(request, "pages/view_snippet.html", context)
 
 

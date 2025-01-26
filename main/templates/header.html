@@ -36,27 +36,6 @@
 
             {% else %}
 
-                {% comment %} <li class="navbar-nav mr-right nav-item dropdown ">
-                    <li class="form-inline">
-                        <a class="btn btn-outline-primary  mr-1 ml-1 " href="{% url 'register' %}">Зарегистрироваться</a>
-                    </li>
-                    <a class="btn btn-outline-primary  my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
-                    <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                        {% include 'login.html' %}
-                    </div>
-                </li> {% endcomment %}
-
-                {% comment %} <ul class="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
-                    <div class="nav-item">
-                        <a class="btn btn-outline-primary  mr-1 ml-1 " href="{% url 'register' %}">Зарегистрироваться</a>
-                    </div>
-                    <a class="btn btn-outline-primary my-1 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        {% include 'login.html' %}
-                    </div>
-                </ul> {% endcomment %}
 
                 <ul class="navbar-nav ml-auto">
                     <!-- Кнопка "Зарегистрироваться" -->
@@ -64,33 +43,18 @@
                         <a class="btn btn-outline-primary mr-2" href="{% url 'register' %}">Зарегистрироваться</a>
                     </li>
                 
-                    <!-- Выпадающее меню "Авторизация" -->
                     <li class="nav-item dropdown mr-right navbar-nav dropdown-menu-right " >
                         <a class="btn btn-outline-primary dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Авторизация
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                             {% include 'login.html' %}
                         </div>
                     </li>
                 </ul>
 
             {% endif %} 
-            {% comment %} {% else %}
-                <ul class="navbar-nav ml-auto nav-item dropdown">
-                    <ul class="nav-item">
-                        <a class="btn btn-outline-primary my-2 " href="{% url 'register' %}">Зарегистрироваться</a>
-                    </ul>
-                    <ul class="form-inline dropdown">
-                        <a class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle" href="#" id="navbarDropdown"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
-                        <div class="dropdown-menu mt-2 "  aria-labelledby="navbarDropdown">
-                            {% include 'login.html' %}
-                        </div>
-                    </ul>
-                </ul>
-            {% endif %}  {% endcomment %}
         </div>
     </div>
 </nav>
