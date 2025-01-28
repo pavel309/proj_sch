@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class ="form-group col">
+    <h2 class = "col col-8 p-1">Редактирование статуса заявки</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class ="form-group"> 
+                <div class = "col col-8 p-1">
+                    <label for="status">Статус</label>
+                    <input type="text" id="status" name="status" value="{{ request.status }}">
+                </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Сохранить изменения</button>
+    </form>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Создание заявки на ремонт для {{ snippet.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить заявку</button>
+    <a href="{% url 'view_snippet' id=snippet.id %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

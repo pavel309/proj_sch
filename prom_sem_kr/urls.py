@@ -29,4 +29,7 @@ urlpatterns = [
     path('register/', views.register, name='register'), 
     path('snippets/<int:id>/edit/', views.edit_snippet, name='edit_snippet'),
     path('snippets/<int:id>/delete/', views.delete_snippet, name='confirm_delete'),
+    path('snippets/<int:id>/repair/', views.create_repair_request, name='create_repair_request'),
+    path('repair-requests/', views.repair_requests_list, name='repair_requests_list'),
+    path('repair-requests/<int:id>/edit/', views.edit_repair_request, name='edit_repair_request'),
 ]

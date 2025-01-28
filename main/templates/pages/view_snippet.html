@@ -17,9 +17,11 @@
       <form>
         <fieldset disabled>
           <div class="form-group row">
-            <div class="col col-8">{{ addform.name.label }}: {{ addform.name }}</div>
+            <div class="col col-4">{{ addform.name.label }}: {{ addform.name }}</div>
             <div class="col col-4">{{ addform.user.label }}: {{ addform.user }}</div>
             <div class="col col-4">{{ addform.status.label }}: {{ addform.status }}</div>
+            <div class="col col-4">{{ addform.count.label }}: {{ addform.count }}</div>
+            <div class="col col-4">{{ addform.send_user.label }}: {{ addform.send_user }}</div>
           </div>
           <div class="form-group row">
             <div class="col">{{ addform.text.label }}: {{ addform.text}}</div>
@@ -33,6 +35,9 @@
           {% else %}
               <p>ID сниппета не определён.</p>
           {% endif %}
+      {% endif %}
+      {% if record and user.is_authenticated %}
+          <a href="{% url 'create_repair_request' id=record.id %}" class="btn btn-outline-warning">Создать заявку на ремонт</a>
       {% endif %}
     </div>
   </div>

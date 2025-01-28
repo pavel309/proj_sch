@@ -10,7 +10,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from pygments.lexers import PythonLexer
 
 from .forms import RegisterForm, AddSnippetForm, LoginForm
-from main.models import Snippet
+from .models import Snippet
+from .models import RepairRequest
+from .forms import RepairRequestForm
 
 
 
@@ -39,12 +41,12 @@ def delete_snippet(request, id):
     
     if request.method == 'POST':
         snippet.delete()
-        messages.add_message(request, messages.SUCCESS, "Данные успешно удалён!")
+        messages.add_message(request, messages.SUCCESS, "Данные успешно удалёны!")
         return redirect('my_snippets')
     
     return render(request, 'confirm_delete.html', {'snippet': snippet})
 
-# Редактирование сниппета администратором
+# Редактирование инвентаря администратором
 @login_required
 @user_passes_test(is_admin)
 def edit_snippet(request, id):
@@ -57,7 +59,7 @@ def edit_snippet(request, id):
 
         # Сохраняем изменения
         snippet.save()
-        messages.add_message(request, messages.SUCCESS, "Данные успешно обновлён!")
+        messages.add_message(request, messages.SUCCESS, "Данные успешно обновлёны!")
         return redirect('view_snippet', id=id)
     return render(request, 'edit_snippet.html', {'snippet': snippet})
 
@@ -166,3 +168,53 @@ def my_snippets_page(request):
     else:
         context["data"] = Snippet.objects.filter(user=request.user)
     return render(request, "pages/view_snippets.html", context)
+
+
+@login_required
+def create_repair_request(request, id):
+    snippet = get_object_or_404(Snippet, id=id)
+    if request.method == 'POST':
+        form = RepairRequestForm(request.POST)
+        if form.is_valid():
+            repair_request = RepairRequest(
+                snippet=snippet,
+                user=request.user,
+                description=form.cleaned_data['description'],
+            )
+            repair_request.save()
+            messages.add_message(request, messages.SUCCESS, "Заявка на ремонт успешно создана!")
+            return redirect('view_snippet', id=id)
+    else:
+        form = RepairRequestForm()
+    
+    context = get_base_context(request, "Создание заявки на ремонт")
+    context['form'] = form
+    context['snippet'] = snippet
+    return render(request, 'pages/create_repair_request.html', context)
+
+
+
+@login_required
+def repair_requests_list(request):
+    if request.user.is_superuser:
+        repair_requests = RepairRequest.objects.all()
+    else:
+        repair_requests = RepairRequest.objects.filter(user=request.user)
+    
+    context = get_base_context(request, "Список заявок на ремонт")
+    context['repair_requests'] = repair_requests
+    return render(request, 'pages/repair_requests_list.html', context)
+
+
+# Редактирование заявки администратором
+@login_required
+@user_passes_test(is_admin)
+def edit_repair_request(request, id):
+    repair = get_object_or_404(RepairRequest, id=id)
+    if request.method == 'POST':
+        repair.status = request.POST.get('status')
+        # Сохраняем изменения
+        repair.save()
+        messages.add_message(request, messages.SUCCESS, "Данные успешно обновлёны!")
+        return redirect('repair_requests_list')
+    return render(request, 'pages/edit_repair_request.html', {'repair': repair})

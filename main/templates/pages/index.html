@@ -20,15 +20,18 @@
           
         </p>
       {% endif %}
+      {% if request.user.is_authenticated %}
       <hr />
+      {%endif%}
     </div>
   </div>
-
+  {% if request.user.is_authenticated %}
   <div class="row mt-3">
     <div class="col-4 offset-4">
       <a href="{% url 'add_snippet' %}" class="btn btn-success btn-block">Добавить инвентарь</a>
     </div>
   </div>
+  {% endif %}
 
   <div class="row mt-3">
     <div class="col">

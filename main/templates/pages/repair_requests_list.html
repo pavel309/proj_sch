@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Пользователь</th>
+            <th>Инвентарь</th>
+            <th>Описание проблемы</th>
+            <th>Статус</th>
+            <th>Дата создания</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in repair_requests %}
+        <tr>
+            {%if user.is_superuser == 1 %}
+            <td>
+                <a href="{% url 'edit_repair_request' id=request.id %}">{{ request.id }}</a>
+            </td>
+            {%else%}
+                <td>{{ request.id }}</td>
+            {%endif%}
+            <td>{{ request.user }}</td>
+            <td>{{ request.snippet.name }}</td>
+            <td>{{ request.description }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
