@@ -9,6 +9,8 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+    
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -68,6 +70,7 @@ class AddSnippetForm(forms.Form):
         label = "Описание",
         max_length = 5000,
         widget = forms.Textarea(attrs={"class": "form-control", "style": "height:500px"}),
+        
     )
 
     status = forms.CharField(
@@ -75,4 +78,12 @@ class AddSnippetForm(forms.Form):
         max_length = 200,
         widget = forms.TextInput(attrs={"class": "form-control"}),
         required = False,
+    )
+
+
+class RepairRequestForm(forms.Form):
+    description = forms.CharField(
+        label="Описание проблемы",
+        max_length=1000,
+        widget=forms.Textarea(attrs={"class": "form-control", "rows": 5}),
     )
