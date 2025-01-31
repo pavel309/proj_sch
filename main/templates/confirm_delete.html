@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Подтверждение удаления</h2>
-<p>Вы уверены, что хотите удалить сниппет "{{ snippet.name }}"?</p>
+<p>Вы уверены, что хотите удалить инвентарь "{{ snippet.name }}"?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Удалить</button>

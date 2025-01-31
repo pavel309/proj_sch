@@ -55,6 +55,7 @@ def edit_snippet(request, id):
         snippet.condition = request.POST.get('condition')
         snippet.count = request.POST.get('count')
         snippet.status = request.POST.get('status')
+        snippet.send_user = request.POST.get('send_user')
         snippet.text = request.POST.get('text')
 
         # Сохраняем изменения
