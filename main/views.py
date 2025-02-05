@@ -13,6 +13,8 @@ from .forms import RegisterForm, AddSnippetForm, LoginForm
 from .models import Snippet
 from .models import RepairRequest
 from .forms import RepairRequestForm
+from .models import Buy
+from .forms import BuyForm
 
 
 
@@ -219,3 +221,39 @@ def edit_repair_request(request, id):
         messages.add_message(request, messages.SUCCESS, "Данные успешно обновлёны!")
         return redirect('repair_requests_list')
     return render(request, 'pages/edit_repair_request.html', {'repair': repair})
+
+
+@login_required
+@user_passes_test(is_admin)
+def buy(request):
+    context = get_base_context(request, "Закупка")
+    if request.method == 'POST':
+        buys = BuyForm(request.POST)
+        if buys.is_valid():
+            thing = Buy(
+                name=buys.data["name"],
+                count = buys.data["count"],
+                send_user = buys.data["send_user"],
+                time_of_create=datetime.datetime.now(),
+            )
+            thing.save()
+            context['buys'] = BuyForm()
+            messages.add_message(request, messages.SUCCESS, "Сохранено")
+            return redirect('view_buy_list')
+        else:
+            messages.add_message(request, messages.ERROR, "Форма содержит ошибки: " + str(buys.errors))
+    else:
+        context['buys'] = BuyForm()
+    return render(request, 'pages/buy.html', context )
+
+
+@login_required
+@user_passes_test(is_admin)
+def view_buy_list(request):
+    context = get_base_context(request, "Закупки")
+    context["data"] = Buy.objects.all()
+    return render(request, "pages/buy_list.html", context)
+
+
+
+

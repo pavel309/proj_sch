@@ -23,3 +23,13 @@ class RepairRequest(models.Model):
 
     def __str__(self):
         return f"Заявка на ремонт #{self.id} для {self.snippet.name}"
+    
+
+class Buy(models.Model):
+    name = models.TextField(max_length=200, default =" ")
+    time_of_create = models.DateTimeField()
+    count = models.CharField(max_length=200 , default='')
+    send_user = models.CharField(max_length=200 , default='')
+
+    def __str__(self):
+        return self.name

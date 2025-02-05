@@ -87,3 +87,17 @@ class RepairRequestForm(forms.Form):
         max_length=1000,
         widget=forms.Textarea(attrs={"class": "form-control", "rows": 5}),
     )
+
+
+class BuyForm(forms.Form):
+    name = forms.CharField(
+        label="Название", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+    
+    count = forms.CharField(
+        label = "Количество", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    send_user = forms.CharField(
+        label = "Имя поставщика", max_length=200, widget=forms.TextInput(attrs={"class": "form-control"})
+    )

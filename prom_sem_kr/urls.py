@@ -32,4 +32,6 @@ urlpatterns = [
     path('snippets/<int:id>/repair/', views.create_repair_request, name='create_repair_request'),
     path('repair-requests/', views.repair_requests_list, name='repair_requests_list'),
     path('repair-requests/<int:id>/edit/', views.edit_repair_request, name='edit_repair_request'),
+    path('buy-list/', views.view_buy_list, name='view_buy_list'),
+    path('buy', views.buy, name='buy'),
 ]
