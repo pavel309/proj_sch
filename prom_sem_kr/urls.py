@@ -34,4 +34,5 @@ urlpatterns = [
     path('repair-requests/<int:id>/edit/', views.edit_repair_request, name='edit_repair_request'),
     path('buy-list/', views.view_buy_list, name='view_buy_list'),
     path('buy', views.buy, name='buy'),
+    path('information_of_usage', views.using_of_inventory, name='using_of_inventory'),
 ]

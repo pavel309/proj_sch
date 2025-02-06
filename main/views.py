@@ -257,3 +257,9 @@ def view_buy_list(request):
 
 
 
+@login_required
+@user_passes_test(is_admin)
+def using_of_inventory(request):
+    context = get_base_context(request, "Отчеты")
+    context["data"] = Snippet.objects.all()
+    return render(request, "pages/using_of_inventory.html", context)

@@ -1,29 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-    <a href="{% url 'buy' %}"class = "btn btn-outline-primary"> Создать </a>
-</div>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Инвентарь</th>
-            <th>Количество</th>
-            <th>Поставщик</th>
-            <th>Дата создания</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for buy in data %}
-        <tr>
-            <td>{{ buy.id }}</td>
-            <td>{{ buy.name }}</td>
-            <td>{{ buy.count }}</td>
-            <td>{{ buy.send_user }}</td>
-            <td>{{ buy.time_of_create }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    
+    <a href="{% url 'buy' %}"class = "btn btn-outline-primary" style="margin-left: 0%;" > Создать </a>
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Инвентарь</th>
+                <th>Количество</th>
+                <th>Поставщик</th>
+                <th>Дата создания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buy in data %}
+            <tr>
+                <td>{{ buy.id }}</td>
+                <td>{{ buy.name }}</td>
+                <td>{{ buy.count }}</td>
+                <td>{{ buy.send_user }}</td>
+                <td>{{ buy.time_of_create }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

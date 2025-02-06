@@ -4,7 +4,7 @@
 <form method="post" action="{% url 'buy' %}">
     {% csrf_token %}
     <div class="form-group">
-        <div class="col col-8">{{ buys.name.label }}: {{ buys.name }}</div>
+        <div class="col col-4">{{ buys.name.label }}: {{ buys.name }}</div>
         <div class="col col-4">{{ buys.count.label }}: {{ buys.count }}</div>
         <div class="col col-4">{{ buys.send_user.label }}: {{ buys.send_user }}</div>
     </div>

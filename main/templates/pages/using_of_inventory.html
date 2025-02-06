@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Имя заказчика</th>
+        <th scope="col">Название</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Состоянние</th>
+        <th scope="col">Статус </th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    {% for data_item in data %}
+        <tr>
+            <td>{{ data_item.user.username }}</td>
+            <td>{{ data_item.name }}</td>
+            <td>{{ data_item.creation_date }}</td>
+            <td>{{ data_item.condition }}</td>
+            <td>{{ data_item.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
